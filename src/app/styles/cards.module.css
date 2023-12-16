@@ -1,0 +1,79 @@
+/* cards.module.css */
+.cardsListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all .3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all .3s ease;
+}
+
+.card:hover img{
+  opacity: 1;
+  transition: opacity .13s ease;
+}
+
+.cardImage {
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.3;
+  transition: opacity .3s ease;
+}
+
+.cardName {
+  margin: 0.6rem 0;
+  max-width: 180px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
+}
+
+.cardDescription {
+  margin-bottom: 0.6rem;
+  max-width: 180px;
+  font-size: 0.75rem;
+}
+
+/* style to each child of cardDescription */
+.cardDescription > * {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-white-space: nowrap;
+  overflow: hidden;
+}
+
+.cardControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.cardControls button{
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}

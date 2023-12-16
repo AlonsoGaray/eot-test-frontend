@@ -1,11 +1,9 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { montserrat } from './ui/fonts'
-import './globals.css'
-import Image from 'next/image'
-import NavLinks from './ui/navbar/nav-links'
-import styles from './page.module.css'
+import { roboto } from './ui/fonts'
+import '@/app/styles/globals.css'
+import NavBar from './components/navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,30 +19,11 @@ export default function RootLayout ({
 }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} ${montserrat.className} antialiased`}>
+      <body className={`${inter.className} ${roboto.className} antialiased`}>
 
-        <nav className={styles.navbar}>
-          <div className={styles.container}>
-            <div className={styles.navbarContainer}>
-              <div className={styles.navbarLinks}>
-                <NavLinks />
-              </div>
+        <NavBar />
 
-              <div className='navbar-profile'>
-                <Image
-                  src='/vercel.svg'
-                  alt='Vercel Logo'
-                  className={styles.vercelLogo}
-                  width={100}
-                  height={24}
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        <div className={styles.container}>
+        <div>
           {children}
         </div>
 

@@ -1,24 +1,17 @@
-.container {
-  min-width: 360px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
+/* NavBar styles */
 .navbarContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  width: 100%;
-  border: 1px solid blue;
 }
 
 .navbar {  
   display: block;
   position: sticky;
   top: 0;
-  border: 1px solid green;
   background-color: #333;
+  z-index: 999;
 }
 
 .navbarLinks {
@@ -40,18 +33,4 @@
 
 .navbarLinks .active {
   color: yellow;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  
-}
-
-@media (prefers-color-scheme: dark) {
-  
 }
