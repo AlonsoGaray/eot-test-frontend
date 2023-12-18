@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { roboto } from './ui/fonts'
 import '@/app/styles/globals.css'
-import NavBar from './components/navbar'
+import NavBar from './layouts/NavBar'
 import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })

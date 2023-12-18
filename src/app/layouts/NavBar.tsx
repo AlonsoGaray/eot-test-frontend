@@ -1,6 +1,6 @@
 'use client'
 import { UserButton, useUser } from '@clerk/nextjs'
-import NavLinks from './NavLinks'
+import NavLinks from '../components/navbar/NavLinks'
 import styles from '@/app/styles/navbar.module.css'
 
 export default function NavBar () {

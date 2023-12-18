@@ -4,7 +4,7 @@ import { CardInfo, CardListObject } from '@/app/types/cardList.types'
 import styles from '@/app/styles/cards.module.css'
 import Image from 'next/image'
 import { auth } from '@clerk/nextjs'
-import { CardListControls } from './cardlistcontrols'
+import { CardListControls } from './CardListControls'
 
 export default async function CardsList ({ name }: {name: string | null}): Promise<React.JSX.Element> {
   const { userId } = auth()

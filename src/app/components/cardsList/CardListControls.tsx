@@ -33,13 +33,15 @@ export function CardListControls ({ userId, cardId, userCards }: CardListControl
     return acc
   }, {})
 
+  const cardAmount = userCardsReduced[cardId] ?? 0
+
   return (
     <div className={styles.cardControls}>
       <button title='Decrease' aria-label='Decrease' onClick={handleDecreaseUserCard}>
         <span>-</span>
       </button>
-      <span>{userCardsReduced[cardId] ?? 0}</span>
-      <button title='AremoveUserCard' aria-label='Add' onClick={handleAddUserCard}>
+      <span>{cardAmount}</span>
+      <button title='Add' aria-label='Add' onClick={handleAddUserCard} disabled={cardAmount === 2}>
         <span>+</span>
       </button>
     </div>

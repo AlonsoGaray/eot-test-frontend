@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import CardsList from '@/app/components/cardsList'
+import CardsList from '@/app/components/cardsList/CardsList'
 import Search from '@/app/components/Search'
 
 export default function Cards ({
