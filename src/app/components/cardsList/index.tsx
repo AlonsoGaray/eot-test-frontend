@@ -1,20 +1,17 @@
 import React from 'react'
-import { fetchLatestTenCards } from '@/app/lib/data'
-import { CardListObject, CardInfo } from '@/app/types/cardList.types'
+import { fetchLatestTenCards, fetchUserCards } from '@/app/lib/data'
+import { CardInfo, CardListObject } from '@/app/types/cardList.types'
 import styles from '@/app/styles/cards.module.css'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-
-// This will load the component client-side only
-const AddIcon = dynamic(() => import('@mui/icons-material/Add'), {
-  ssr: false
-})
-const RemoveIcon = dynamic(() => import('@mui/icons-material/Remove'), {
-  ssr: false
-})
+import { auth } from '@clerk/nextjs'
+import { CardListControls } from './cardlistcontrols'
 
 export default async function CardsList ({ name }: {name: string | null}): Promise<React.JSX.Element> {
+  const { userId } = auth()
+  if (!userId) return <></>
   const latestTenCards: CardListObject = await fetchLatestTenCards(name)
+
+  const userCards = await fetchUserCards(userId)
 
   return (
     <div className={styles.cardsListContainer}>
@@ -38,23 +35,7 @@ export default async function CardsList ({ name }: {name: string | null}): Promi
             <div aria-label='Card Number' title={card.number}>Card number: {card.number}/{card.set.total}</div>
           </div>
 
-          <div className={styles.cardControls}>
-            <button title='Decrease' aria-label='Decrease'>
-              <span>
-                <RemoveIcon />
-              </span>
-            </button>
-
-            <span>
-              0
-            </span>
-
-            <button title='Add' aria-label='Add'>
-              <span>
-                <AddIcon />
-              </span>
-            </button>
-          </div>
+          <CardListControls userId={userId} cardId={card.id} userCards={userCards} />
         </div>
       ))}
     </div>

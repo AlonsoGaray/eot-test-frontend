@@ -17,3 +17,16 @@ export async function fetchLatestTenCards (name: string | null) {
     throw new Error('Failed to fetch latest ten cards')
   }
 }
+
+export async function fetchUserCards (userId: string) {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user-card/userId/${userId}`)
+
+    if (response.status === 200) {
+      return response.data
+    }
+  } catch (err) {
+    console.log('🚀 ~ file: data.ts:13 ~ fetchUserCards ~ err:', err)
+    throw new Error('Failed to fetch user cards')
+  }
+}

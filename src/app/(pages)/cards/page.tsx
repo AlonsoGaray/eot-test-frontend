@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
-import Search from '@/app/components/search'
 import CardsList from '@/app/components/cardsList'
+import Search from '@/app/components/Search'
 
 export default function Cards ({
   searchParams
