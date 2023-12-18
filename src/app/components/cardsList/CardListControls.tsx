@@ -2,16 +2,17 @@
 import React from 'react'
 import { addUserCard, decreaseUserCard } from '@/app/services/userCard'
 import styles from '@/app/styles/cards.module.css'
-import { UserCard } from '@/app/types/userCard.types'
 import { useRouter } from 'next/navigation'
+import { AddIcon } from '@/app/assets/icons/AddIcon'
+import { DecreaseIcon } from '@/app/assets/icons/DecreaseIcon'
 
 interface CardListControlsProps {
   userId: string;
   cardId: string;
-  userCards: Array<UserCard>
+  cardAmount: number
 }
 
-export function CardListControls ({ userId, cardId, userCards }: CardListControlsProps): React.ReactElement {
+export function CardListControls ({ userId, cardId, cardAmount }: CardListControlsProps): React.ReactElement {
   const router = useRouter()
 
   const handleAddUserCard = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -28,21 +29,29 @@ export function CardListControls ({ userId, cardId, userCards }: CardListControl
     router.refresh()
   }
 
-  const userCardsReduced = userCards.reduce((acc: any, card: UserCard) => {
-    acc[card.cardId] = card.amount
-    return acc
-  }, {})
-
-  const cardAmount = userCardsReduced[cardId] ?? 0
+  const isAddDisabled = cardAmount === 2
+  const isDecreaseDisabled = cardAmount === 0
 
   return (
     <div className={styles.cardControls}>
-      <button title='Decrease' aria-label='Decrease' onClick={handleDecreaseUserCard}>
-        <span>-</span>
+      <button
+        className={isDecreaseDisabled ? styles.disabled : ''}
+        title='Decrease'
+        onClick={handleDecreaseUserCard}
+        disabled={isDecreaseDisabled}
+        aria-label='Decrease'
+      >
+        <DecreaseIcon filler={isDecreaseDisabled ? 'gray' : '#0F0F0F'} />
       </button>
       <span>{cardAmount}</span>
-      <button title='Add' aria-label='Add' onClick={handleAddUserCard} disabled={cardAmount === 2}>
-        <span>+</span>
+      <button
+        className={isAddDisabled ? styles.disabled : ''}
+        title='Add'
+        onClick={handleAddUserCard}
+        disabled={isAddDisabled}
+        aria-label='Add'
+      >
+        <AddIcon filler={isAddDisabled ? 'gray' : '#0F0F0F'} />
       </button>
     </div>
   )
