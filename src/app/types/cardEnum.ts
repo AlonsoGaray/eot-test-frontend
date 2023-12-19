@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum SearchParams {
   Q = 'q',
   PageSize = 'pageSize',
