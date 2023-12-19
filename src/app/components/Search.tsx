@@ -3,19 +3,17 @@ import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 import styles from '@/app/styles/search.module.css'
+import { SearchParams } from '../types/cardEnum'
 
-export default function Search ({ placeholder }: {placeholder: string}) {
+export default function Search ({ placeholder, totalPages }: {placeholder: string, totalPages: number}) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleSearch = useDebouncedCallback((name: string) => {
+  const handleSearch = useDebouncedCallback((searchParam: SearchParams, value: string) => {
     const params = new URLSearchParams(searchParams)
-    if (name) {
-      params.set('q', name)
-    } else {
-      params.delete('q')
-    }
+
+    params.set(searchParam, value)
 
     replace(`${pathname}?${params.toString()}`)
   }, 400)
@@ -23,33 +21,48 @@ export default function Search ({ placeholder }: {placeholder: string}) {
   return (
     <div className={styles.searchContainer}>
 
-      <div className={styles.inputContainer}>
+      <div className={styles.inputSearchContainer}>
         <input
           type='text'
           defaultValue={searchParams.get('q')?.toString()}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => handleSearch(SearchParams.Q, e.target.value)}
           placeholder={placeholder}
           aria-label='Search input'
         />
       </div>
 
-      <select value='10' onChange={e => console.log(e)}>
-        <option value='10'>10</option>
-        <option value='20'>20</option>
-        <option value='50'>50</option>
-      </select>
+      <div className={styles.inputPageSizeContainer}>
+        <select
+          value={searchParams.get('pageSize')?.toString()}
+          onChange={e => handleSearch(SearchParams.PageSize, e.target.value)}
+        >
+          <option value='10'>10</option>
+          <option value='20'>20</option>
+          <option value='50'>50</option>
+        </select>
+      </div>
 
-      <input
-        type='number'
-        value='10'
-        onChange={e => console.log(e)}
-        placeholder='Page'
-      />
+      <div className={styles.inputPageContainer}>
+        <select
+          defaultValue={searchParams.get('page')?.toString()}
+          onChange={(e) => handleSearch(SearchParams.Page, e.target.value)}
+        >
+          {Array.from({ length: totalPages }, (_, i) => (
+            <option key={i} value={i + 1}>{i + 1}</option>
+          ))}
+        </select>
+      </div>
 
-      <select value='a' onChange={e => console.log(e)}>
-        <option value='-set.releaseDate'>Release Date</option>
-        <option value='name'>Name</option>
-      </select>
+      {/* TODO: Change it to dropdown with multiple selections */}
+      <div className={styles.inputReleaseContainer}>
+        <select
+          defaultValue={searchParams.get('q')?.toString()}
+          onChange={(e) => handleSearch(SearchParams.OrderBy, e.target.value)}
+        >
+          <option value='-set.releaseDate'>Release Date</option>
+          <option value='name'>Name</option>
+        </select>
+      </div>
     </div>
   )
 }

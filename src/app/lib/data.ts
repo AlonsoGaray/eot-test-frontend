@@ -1,11 +1,19 @@
 import axios from 'axios'
+import { SearchParams } from '../types/card.types'
 
-export async function fetchLatestTenCards (name: string | null) {
+export async function fetchLatestTenCards ({
+  pageSize = '10',
+  q = '',
+  page = '1',
+  orderBy = '-set.releaseDate'
+}: SearchParams) {
   try {
-    const response = await axios.get('http://localhost:8080/api/card/latest', {
+    const response = await axios.get('http://localhost:8080/api/card', {
       params: {
-        pageSize: 10,
-        q: name ? `name:${name}*` : ''
+        pageSize,
+        q: `name:${q}*`,
+        page,
+        orderBy
       }
     })
 
@@ -13,8 +21,7 @@ export async function fetchLatestTenCards (name: string | null) {
       return response.data
     }
   } catch (err) {
-    console.log('🚀 ~ file: data.ts:13 ~ fetchLatestTenCards ~ err:', err)
-    throw new Error('Failed to fetch latest ten cards')
+    return 'No cards found'
   }
 }
 
@@ -26,7 +33,6 @@ export async function fetchUserCards (userId: string) {
       return response.data
     }
   } catch (err) {
-    console.log('🚀 ~ file: data.ts:13 ~ fetchUserCards ~ err:', err)
-    throw new Error('Failed to fetch user cards')
+    return 'No cards for user found'
   }
 }
