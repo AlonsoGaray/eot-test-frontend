@@ -12,10 +12,9 @@ export default function NavBar () {
           <div className={styles.navbarLinks}>
             <NavLinks />
           </div>
-
-          <div className={styles.navbarProfileContainer}>
-            {isLoaded && user ? <UserButton /> : <><SignInButton /><SignUpButton /></>}
-          </div>
+          {isLoaded && user
+            ? <UserButton />
+            : <div className={styles.navbarProfileContainer}> <SignInButton /><SignUpButton /> </div>}
         </div>
       </div>
     </nav>
