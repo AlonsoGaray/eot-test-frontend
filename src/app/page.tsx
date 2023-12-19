@@ -1,18 +1,26 @@
-import { auth } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
+// import { auth } from '@clerk/nextjs'
+// import { redirect } from 'next/navigation'
 import React from 'react'
+import Image from 'next/image'
+import styles from '@/app/styles/page.module.css'
 
 export default function Home (): React.JSX.Element {
-  const { userId } = auth()
-  if (userId) {
-    redirect('/news')
-  }
+  // const { userId } = auth()
+  // if (userId) {
+  //   redirect('/my-collection')
+  // }
 
   return (
     <div className='container'>
 
-      <div>
-        <h1>Welcome to the HomePage!</h1>
+      <div className={styles.bannerContainer}>
+        <Image
+          className={styles.bannerImage}
+          src='/images/banner.webp'
+          alt='Banner Image'
+          width={500}
+          height={500}
+        />
       </div>
 
       <div style={{ display: 'flex' }}>

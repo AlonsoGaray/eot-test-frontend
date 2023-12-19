@@ -35,40 +35,42 @@ export default function Search ({ placeholder, totalPages, mode }: {placeholder:
         />
       </div>
 
-      <div className={styles.inputPageSizeContainer}>
-        <span>Show: </span>
-        <select
-          value={searchParams.get('pageSize')?.toString()}
-          onChange={e => handleSearch(SearchParams.PageSize, e.target.value)}
-        >
-          <option value='10'>10</option>
-          <option value='20'>20</option>
-          <option value='50'>50</option>
-        </select>
-      </div>
+      <div className={styles.bottomSearch}>
+        <div className={styles.inputPageSizeContainer}>
+          <span>Show: </span>
+          <select
+            value={searchParams.get('pageSize')?.toString()}
+            onChange={e => handleSearch(SearchParams.PageSize, e.target.value)}
+          >
+            <option value='10'>10</option>
+            <option value='20'>20</option>
+            <option value='50'>50</option>
+          </select>
+        </div>
 
-      <div className={styles.inputPageContainer}>
-        <span>Page: </span>
-        <select
-          defaultValue={searchParams.get('page')?.toString()}
-          onChange={(e) => handleSearch(SearchParams.Page, e.target.value)}
-        >
-          {Array.from({ length: totalPages }, (_, i) => (
-            <option key={i} value={i + 1}>{i + 1}</option>
-          ))}
-        </select>
-      </div>
+        <div className={styles.inputPageContainer}>
+          <span>Page: </span>
+          <select
+            defaultValue={searchParams.get('page')?.toString()}
+            onChange={(e) => handleSearch(SearchParams.Page, e.target.value)}
+          >
+            {Array.from({ length: totalPages }, (_, i) => (
+              <option key={i} value={i + 1}>{i + 1}</option>
+            ))}
+          </select>
+        </div>
 
-      {/* TODO: Change it to dropdown with multiple selections */}
-      <div className={styles.inputReleaseContainer}>
-        <span>Order by: </span>
-        <select
-          defaultValue={searchParams.get('q')?.toString()}
-          onChange={(e) => handleSearch(SearchParams.OrderBy, e.target.value)}
-        >
-          <option value='-set.releaseDate'>Release Date</option>
-          <option value='name'>Name</option>
-        </select>
+        {/* TODO: Change it to dropdown with multiple selections */}
+        <div className={styles.inputReleaseContainer}>
+          <span>Order by: </span>
+          <select
+            defaultValue={searchParams.get('q')?.toString()}
+            onChange={(e) => handleSearch(SearchParams.OrderBy, e.target.value)}
+          >
+            <option value='-set.releaseDate'>Release Date</option>
+            <option value='name'>Name</option>
+          </select>
+        </div>
       </div>
     </div>
   )

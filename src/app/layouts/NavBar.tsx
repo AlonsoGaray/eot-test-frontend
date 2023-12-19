@@ -1,5 +1,5 @@
 'use client'
-import { UserButton, useUser } from '@clerk/nextjs'
+import { UserButton, useUser, SignInButton, SignUpButton } from '@clerk/nextjs'
 import NavLinks from '../components/navbar/NavLinks'
 import styles from '@/app/styles/navbar.module.css'
 
@@ -13,8 +13,8 @@ export default function NavBar () {
             <NavLinks />
           </div>
 
-          <div className='navbar-profile'>
-            {isLoaded && user ? <UserButton /> : 'Not logged in'}
+          <div className={styles.navbarProfileContainer}>
+            {isLoaded && user ? <UserButton /> : <><SignInButton /><SignUpButton /></>}
           </div>
         </div>
       </div>
