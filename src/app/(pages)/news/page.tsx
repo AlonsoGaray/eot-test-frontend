@@ -1,7 +1,7 @@
 export default async function News () {
   return (
-    <div>
-      <h1>News</h1>
+    <div className='container'>
+      <h1>News under construction</h1>
     </div>
   )
 }

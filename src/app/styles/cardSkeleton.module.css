@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: repeat(5,minmax(0,1fr));
   justify-content: space-between;
+  padding: 1rem 1rem;
   gap: 1rem;
 }
 
@@ -63,6 +64,7 @@
 .cardControls > div {
   width: 1.5rem;
   height: 1.5rem;
+  border-radius: 50%;
   animation: skeleton-loading 1s linear infinite alternate;
 }
 

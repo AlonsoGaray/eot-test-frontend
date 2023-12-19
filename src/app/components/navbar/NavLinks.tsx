@@ -21,6 +21,7 @@ export default function NavLinks () {
             key={link.name}
             href={link.href}
             className={pathname === link.href ? `${styles.active}` : ''}
+            shallow
           >
             {link.name}
           </Link>
