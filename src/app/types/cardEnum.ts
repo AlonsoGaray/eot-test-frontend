@@ -4,3 +4,8 @@ export enum SearchParams {
   Page = 'page',
   OrderBy = 'orderBy'
 }
+
+export enum SearchMode {
+  Search = 'search',
+  Filter = 'filter',
+}

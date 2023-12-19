@@ -3,9 +3,9 @@ import React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 import styles from '@/app/styles/search.module.css'
-import { SearchParams } from '../types/cardEnum'
+import { SearchMode, SearchParams } from '../types/cardEnum'
 
-export default function Search ({ placeholder, totalPages }: {placeholder: string, totalPages: number}) {
+export default function Search ({ placeholder, totalPages, mode }: {placeholder: string, totalPages: number, mode: SearchMode}) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
@@ -15,7 +15,11 @@ export default function Search ({ placeholder, totalPages }: {placeholder: strin
 
     params.set(searchParam, value)
 
-    replace(`${pathname}?${params.toString()}`)
+    if (mode === SearchMode.Search) {
+      replace(`${pathname}?${params.toString()}`)
+    } else if (mode === SearchMode.Filter) {
+      params.set(SearchParams.Page, '1')
+    }
   }, 400)
 
   return (
@@ -32,6 +36,7 @@ export default function Search ({ placeholder, totalPages }: {placeholder: strin
       </div>
 
       <div className={styles.inputPageSizeContainer}>
+        <span>Show: </span>
         <select
           value={searchParams.get('pageSize')?.toString()}
           onChange={e => handleSearch(SearchParams.PageSize, e.target.value)}
@@ -43,6 +48,7 @@ export default function Search ({ placeholder, totalPages }: {placeholder: strin
       </div>
 
       <div className={styles.inputPageContainer}>
+        <span>Page: </span>
         <select
           defaultValue={searchParams.get('page')?.toString()}
           onChange={(e) => handleSearch(SearchParams.Page, e.target.value)}
@@ -55,6 +61,7 @@ export default function Search ({ placeholder, totalPages }: {placeholder: strin
 
       {/* TODO: Change it to dropdown with multiple selections */}
       <div className={styles.inputReleaseContainer}>
+        <span>Order by: </span>
         <select
           defaultValue={searchParams.get('q')?.toString()}
           onChange={(e) => handleSearch(SearchParams.OrderBy, e.target.value)}

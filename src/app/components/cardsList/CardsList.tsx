@@ -1,13 +1,12 @@
 import React from 'react'
 import { fetchUserCards } from '@/app/lib/data'
-import { CardInfo, CardListObject } from '@/app/types/cardList.types'
 import styles from '@/app/styles/cards.module.css'
 import Image from 'next/image'
 import { auth } from '@clerk/nextjs'
 import { CardListControls } from './CardListControls'
 import { UserCard } from '@/app/types/userCard.types'
 
-export default async function CardsList ({ searchResults } : {searchResults: CardListObject}): Promise<React.JSX.Element> {
+export default async function CardsList ({ searchResults } : {searchResults: any }): Promise<React.JSX.Element> {
   const { userId } = auth()
   if (!userId) return <></>
 
@@ -23,7 +22,7 @@ export default async function CardsList ({ searchResults } : {searchResults: Car
   return (
     <div className={styles.cardsListContainer}>
       {searchResults.totalCount > 0
-        ? searchResults.data.map((card: CardInfo) => {
+        ? searchResults.data.reverse().map((card: any) => {
           const cardAmount = userCardsReduced[card.id] ?? 0
           const hasCard = cardAmount > 0
           return (
