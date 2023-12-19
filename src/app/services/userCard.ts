@@ -1,5 +1,5 @@
 export async function addUserCard (userId: string, cardId: string): Promise<any> {
-  const response = await fetch('http://localhost:8080/api/user-card/add', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user-card/add`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ export async function addUserCard (userId: string, cardId: string): Promise<any>
 }
 
 export async function decreaseUserCard (userId: string, cardId: string): Promise<any> {
-  const response = await fetch('http://localhost:8080/api/user-card/decrease', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user-card/decrease`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
