@@ -1,24 +1,10 @@
-import React, { Suspense } from 'react'
-import Search from '@/app/components/search'
-import CardsList from '@/app/components/cardsList'
+import ReusableCardList from '@/app/components/cardsList/ReusableCardList'
+import { SearchParams } from '@/app/types/card.types'
+import { SearchMode } from '@/app/types/cardEnum'
+import React from 'react'
 
-export default function Cards ({
-  searchParams
-}: {
-  searchParams?: {
-    q: string
-  }
-}): React.JSX.Element {
-  const searchString = searchParams?.q || null
+export default async function Cards ({ searchParams }: { searchParams: SearchParams}): Promise<React.JSX.Element> {
   return (
-    <div className='container'>
-
-      <Search placeholder='Search with name' />
-
-      <Suspense key={searchString} fallback={<p>Buscanding</p>}>
-        <CardsList name={searchString} />
-      </Suspense>
-
-    </div>
+    <ReusableCardList mode={SearchMode.Search} searchParams={searchParams} />
   )
 }

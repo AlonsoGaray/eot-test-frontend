@@ -3,7 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { roboto } from './ui/fonts'
 import '@/app/styles/globals.css'
-import NavBar from './components/navbar'
+import NavBar from './layouts/NavBar'
+import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,16 +19,18 @@ export default function RootLayout ({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en'>
-      <body className={`${inter.className} ${roboto.className} antialiased`}>
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={`${inter.className} ${roboto.className} antialiased`}>
 
-        <NavBar />
+          <NavBar />
 
-        <div>
-          {children}
-        </div>
+          <div>
+            {children}
+          </div>
 
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

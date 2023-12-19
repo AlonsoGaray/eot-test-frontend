@@ -1,6 +1,13 @@
+import { auth } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 export default function Home (): React.JSX.Element {
+  const { userId } = auth()
+  if (userId) {
+    redirect('/news')
+  }
+
   return (
     <div className='container'>
 

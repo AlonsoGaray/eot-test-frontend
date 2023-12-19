@@ -1,11 +1,20 @@
 import axios from 'axios'
+import { SearchParams } from '../types/card.types'
+import { UserCard } from '../types/userCard.types'
 
-export async function fetchLatestTenCards (name: string | null) {
+export async function fetchAllCards ({
+  pageSize = '10',
+  q = '',
+  page = '1',
+  orderBy = '-set.releaseDate'
+}: SearchParams) {
   try {
-    const response = await axios.get('http://localhost:8080/api/card/latest', {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/card`, {
       params: {
-        pageSize: 10,
-        q: name ? `name:${name}*` : ''
+        pageSize,
+        q: `name:${q}*`,
+        page,
+        orderBy
       }
     })
 
@@ -13,7 +22,34 @@ export async function fetchLatestTenCards (name: string | null) {
       return response.data
     }
   } catch (err) {
-    console.log('🚀 ~ file: data.ts:13 ~ fetchLatestTenCards ~ err:', err)
-    throw new Error('Failed to fetch latest ten cards')
+    return 'No cards found'
+  }
+}
+
+export async function fetchUserCards (userId: string) {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user-card/userId/${userId}`)
+
+    if (response.status === 200) {
+      getCardsFromUser(response.data)
+
+      return response.data
+    }
+  } catch (err) {
+    return 'No cards for user found'
+  }
+}
+
+export async function getCardsFromUser (userCards: Array<UserCard>) {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/card/userCards`, {
+      params: {
+        userCards
+      }
+    })
+
+    return response.data
+  } catch (err) {
+    return 'No cards for user found'
   }
 }

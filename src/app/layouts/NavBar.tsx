@@ -1,8 +1,10 @@
-import Image from 'next/image'
-import NavLinks from './navLinks'
+'use client'
+import { UserButton, useUser } from '@clerk/nextjs'
+import NavLinks from '../components/navbar/NavLinks'
 import styles from '@/app/styles/navbar.module.css'
 
 export default function NavBar () {
+  const { user, isLoaded } = useUser()
   return (
     <nav className={styles.navbar}>
       <div className='container'>
@@ -12,14 +14,7 @@ export default function NavBar () {
           </div>
 
           <div className='navbar-profile'>
-            <Image
-              src='/vercel.svg'
-              alt='Vercel Logo'
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
+            {isLoaded && user ? <UserButton /> : 'Not logged in'}
           </div>
         </div>
       </div>
