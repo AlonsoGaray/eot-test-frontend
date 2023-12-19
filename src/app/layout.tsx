@@ -22,7 +22,6 @@ export default function RootLayout ({
     <ClerkProvider>
       <html lang='en'>
         <body className={`${inter.className} ${roboto.className} antialiased`}>
-
           <NavBar />
 
           <div>
