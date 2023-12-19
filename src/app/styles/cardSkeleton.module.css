@@ -1,0 +1,90 @@
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%)
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%)
+  }
+}
+
+.cardsListContainer {
+  display: grid;
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.cardImage {
+  max-width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.cardName {
+  height: 15px;
+  width: 70%;
+  margin: 0 auto;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.cardDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem
+}
+
+.cardSetName,
+.cardSetSeries,
+.cardNumber {
+  height: 15px;
+  width: 100%;
+  margin: 0 auto;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.cardControls {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.cardControls > div {
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .cardsListContainer {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+}
+/* Mobile */
+@media (max-width: 835px) {
+  .cardsListContainer {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+}
+@media (max-width: 610px) {
+  .cardsListContainer {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width: 500px) {
+  .cardsListContainer {
+    grid-template-columns: repeat(1,minmax(0,1fr));
+  }
+}

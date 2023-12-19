@@ -6,6 +6,7 @@ import CardsList from './CardsList'
 import { UserCard } from '@/app/types/userCard.types'
 import { SearchParams } from '@/app/types/card.types'
 import { SearchMode } from '@/app/types/cardEnum'
+import CardsListSkeleton from './CardListSkeleton'
 
 export default async function ReusableCardList ({ mode, searchParams }: {mode: SearchMode, searchParams: SearchParams}): Promise<React.JSX.Element> {
   const { userId } = auth()
@@ -29,7 +30,7 @@ export default async function ReusableCardList ({ mode, searchParams }: {mode: S
         ? <Search placeholder='Search with name' totalPages={pages} mode={mode} />
         : <div className='title'>My Collection</div>}
 
-      <Suspense key={userId} fallback={<p>Searching</p>}>
+      <Suspense key={userId} fallback={<CardsListSkeleton />}>
         <CardsList searchResults={cards} />
       </Suspense>
 
