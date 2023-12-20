@@ -36,6 +36,7 @@ Made by AlonsoGaray
 The frameworks/libraries/dependencies that I used for this project are the following:
 
 - [NextJs](https://nextjs.org/)
+- [Supabase](https://supabase.com/)
 - [Axios](https://axios-http.com/)
 - [Clerk](https://clerk.com/)
 - [UseDebounce](https://www.npmjs.com/package/use-debounce)
