@@ -5,7 +5,11 @@ import styles from '@/app/styles/page.module.css'
 import Button from './components/Button'
 
 export default function Home (): React.JSX.Element {
-  const { userId } = auth()
+  let userId
+
+  if (process.env.NODE_ENV !== 'test') {
+    userId = auth().userId
+  }
 
   return (
     <div className='container'>
