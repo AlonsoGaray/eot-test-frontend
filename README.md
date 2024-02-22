@@ -79,6 +79,7 @@ Distributed under the MIT License.
 
 Alonso Garay - alonsogarayp@gmail.com
 
-Project Link: [https://github.com/AlonsoGaray/eot-test-frontend](https://github.com/AlonsoGaray/eot-test-frontend)
+Frontend Project Link: [https://github.com/AlonsoGaray/eot-test-frontend](https://github.com/AlonsoGaray/eot-test-frontend)    
+Backend Project Link: [https://github.com/AlonsoGaray/eot-test-backend](https://github.com/AlonsoGaray/eot-test-backend)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
